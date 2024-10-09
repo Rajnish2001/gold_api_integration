@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Gold Price</title>
+    <script>
+        async function fetchGoldPrice() {
+            const response = await fetch('/gold_prize');
+            const data = await response.json();
+            if (data.price) {
+                document.querySelector('.amount').innerHTML = `
+                    ${parseFloat(data.price).toLocaleString('en-US', { minimumFractionDigits: 2 })} 
+                    <span class="currency currency-usd">USD</span>
+                `;
+            } else {
+                console.error('Error fetching gold price:', data.error);
+            }
+        }
+
+        setInterval(fetchGoldPrice, 30000);  // Fetch every 30 seconds
+        window.onload = fetchGoldPrice;  // Initial fetch on page load
+    </script>
+</head>
+<body>
+    <div class="card-amount">
+        <span class="amount">Loading...</span>
+        <span class="currency currency-usd">USD</span>
+        <span class="change down text-danger">
+            <em class="icon ni ni-arrow-long-down"></em> 1.93%
+        </span>
+    </div>
+</body>
+</html>

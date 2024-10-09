@@ -1,0 +1,39 @@
+{% extends "base_t.html" %}
+{% block content %}
+
+<div class="container">
+    <h2>Update Investor Information</h2>
+    <form action="{{ url_for('update_investor', investor_id=investor[0]) }}" method="POST">
+        <div class="form-group">
+            <label for="fullname">Full Name:</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" value="{{ investor[2] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ investor[3] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control" id="phone" name="phone" value="{{ investor[4] }}" pattern="[0-9]{10}" required>
+        </div>
+        <div class="form-group">
+            <label for="investment">Investment Amount:</label>
+            <input type="number" class="form-control" id="investment" name="investment" value="{{ investor[5] }}" step="0.01" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="nomineename">Nominee Name:</label>
+            <input type="text" class="form-control" id="nomineename" name="nomineename" value="{{ investor[7] }}" required>
+        </div>
+        <div class="form-group">
+            <label for="nominee_phone">Nominee Phone:</label>
+            <input type="tel" class="form-control" id="nominee_phone" name="nominee_phone" value="{{ investor[8] }}" pattern="[0-9]{10}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">New Password (Leave blank if you don't want to change):</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Investor</button>
+    </form>
+</div>
+
+{% endblock %}

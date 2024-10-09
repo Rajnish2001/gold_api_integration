@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+  <head>
+    <base href="../" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Softnio" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers."
+    />
+    <!-- Fav Icon  -->
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/favicon.png') }}"
+    />
+    <!-- Page Title  -->
+    <title>Varniraj Invest Dashboard | DashLite Admin Template</title>
+    <!-- StyleSheets  -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/dashlite.css') }}?ver=3.1.1"
+    />
+    <link
+      id="skin-default"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/theme.css') }}?ver=3.1.1"
+    />
+  </head>
+
+  <body class="nk-body npc-invest bg-lighter">
+    <div class="nk-app-root">
+      <!-- wrap @s -->
+      <div class="nk-wrap">        
+        <!-- messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+           {{message}}
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <!-- child template -->
+
+<div class="nk-app-root">
+  <!-- main @s -->
+  <div class="nk-main">
+    <!-- wrap @s -->
+    <div class="nk-wrap nk-wrap-nosidebar">
+      <!-- content @s -->
+      <div class="nk-content">
+        <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+          <div class="card card-bordered">
+            <div class="card-inner card-inner-lg">
+              <div class="nk-block-head">
+                <div class="nk-block-head-content">
+                  <h4 class="nk-block-title">Login</h4>
+                </div>
+              </div>
+              <form action="{{ url_for('login') }}" method="POST">
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+              {% if error %}
+                <div class="error">{{ error }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- wrap @e -->
+    </div>
+    <!-- content @e -->
+  </div>
+  <!-- main @e -->
+</div>
+
+    <script>
+        // Additional client-side validation (optional)
+        function validateForm() {
+            const phone = document.getElementById('phone').value;
+
+            // Check if the phone number is exactly 10 digits
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Phone number must be exactly 10 digits.");
+                return false;  // Prevent form submission
+            }
+
+            return true;  // Allow form submission
+        }
+    </script>
+    <script src="{{ url_for('static', filename='assets/js/bundle.js') }}?ver=3.1.1"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/scripts.js') }}?ver=3.1.1"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/charts/gd-invest.js') }}?ver=3.1.1"></script>
+  </body>
+</html>

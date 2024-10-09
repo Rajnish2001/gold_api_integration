@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+<head>
+    <base href="../" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Softnio" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers." />
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    <!-- Page Title  -->
+    <title>Varniraj Invest Dashboard | Add Bill</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/dashlite.css') }}?ver=3.1.1" />
+    <link id="skin-default" rel="stylesheet" href="{{ url_for('static', filename='assets/css/theme.css') }}?ver=3.1.1" />
+</head>
+
+<body class="nk-body npc-invest bg-lighter">
+    <div class="nk-app-root">
+        <!-- wrap @s -->
+        <div class="nk-wrap">        
+            <!-- messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- child template -->
+            <div class="nk-main">
+                <div class="nk-wrap nk-wrap-nosidebar">
+                    <!-- content @s -->
+                    <div class="nk-content">
+                        <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                            <div class="card card-bordered">
+                                <div class="card-inner card-inner-lg">
+                                    <div class="nk-block-head">
+                                        <div class="nk-block-head-content">
+                                            <h4 class="nk-block-title">Add Bill</h4>
+                                        </div>
+                                    </div>
+                                    <form action="{{ url_for('add_bill') }}" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="investor_id">Select Investor:</label>
+                                            <select class="form-control" id="investor_id" name="investor_id" required>
+                                                <option value="">Select Investor</option>
+                                                {% for investor in investors %}
+                                                    <option value="{{ investor[0] }}">{{ investor[1] }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bill_file">Upload Bill (PDF):</label>
+                                            <input type="file" class="form-control" id="bill_file" name="bill_file" accept=".pdf" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profit_amount">Profit Amount:</label>
+                                            <input type="number" class="form-control" id="profit_amount" name="profit_amount" step="0.01" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">Add Bill</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- wrap @e -->
+                </div>
+                <!-- content @e -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='assets/js/bundle.js') }}?ver=3.1.1"></script>
+    <script src="{{ url_for('static', filename='assets/js/scripts.js') }}?ver=3.1.1"></script>
+    <script src="{{ url_for('static', filename='assets/js/charts/gd-invest.js') }}?ver=3.1.1"></script>
+</body>
+</html>

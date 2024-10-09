@@ -1,0 +1,147 @@
+{% extends "base_t.html" %} {% block content %}
+
+<div class="nk-app-root">
+  <!-- wrap @s -->
+  <div class="nk-wrap">
+    <!-- content @s -->
+    <div class="nk-content nk-content-fluid">
+      <div class="container-xl wide-xl">
+        <div class="nk-content-inner">
+          <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+              <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                  <h3 class="nk-block-title page-title">Users Details</h3>
+                  <div class="nk-block-des text-soft">
+                    <p>You have total {{ user_count }} Users</p>
+                  </div>
+                </div>
+                <!-- .nk-block-head-content -->
+                <div class="nk-block-head-content">
+                  <div class="toggle-wrap nk-block-tools-toggle">
+                    <a
+                      href="#"
+                      class="btn btn-icon btn-trigger toggle-expand me-n1"
+                      data-target="pageMenu"
+                      ><em class="icon ni ni-menu-alt-r"></em
+                    ></a>
+                    <div class="toggle-expand-content" data-content="pageMenu">
+                      <ul class="nk-block-tools g-3">
+                        <li class="nk-block-tools-opt">
+                          <div class="drodown">
+                            <a
+                              href="#"
+                              class="dropdown-toggle btn btn-icon btn-primary"
+                              data-bs-toggle="dropdown"
+                              ><em class="icon ni ni-plus"></em
+                            ></a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <ul class="link-list-opt no-bdr">
+                                <li>
+                                  <a href="{{ url_for('register_page') }}"
+                                    ><span>Add User</span></a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- .toggle-wrap -->
+                </div>
+                <!-- .nk-block-head-content -->
+              </div>
+              <!-- .nk-block-between -->
+            </div>
+
+            <div class="nk-block nk-block-lg">
+              <div class="row g-gs">
+                {% for investor in investors %}
+                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="team">
+                                <div class="team-options">
+                                    <div class="drodown">
+                                        <a
+                                            href="#"
+                                            class="dropdown-toggle btn btn-sm btn-icon btn-trigger"
+                                            data-bs-toggle="dropdown"
+                                        ><em class="icon ni ni-more-h"></em></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <ul class="link-list-opt no-bdr">
+                                                <li>
+                                                    <a href="{{ url_for('update_investor', investor_id=investor.id) }}"
+                                                    >
+                                                    <span>Edit User</span></a>
+                                                </li>
+                                                <li class="divider"></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-card user-card-s2">
+                                    <div class="user-avatar lg bg-primary">
+                                        <span>{{ investor.fullname[0:2].upper() }}</span>
+                                        <div class="status dot dot-lg dot-success"></div>
+                                    </div>
+                                    <div class="user-info">
+                                        <h6>{{ investor.fullname }}</h6>  <!-- Changed from username to fullname -->
+                                        <span class="sub-text">Investor</span>
+                                    </div>
+                                </div>
+                                <ul class="team-info">
+                                    <li>
+                                        <span>Join Date</span>
+                                        <span>{{ investor.created_on.strftime('%Y-%m-%d') }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Contact</span>
+                                        <span>{{ investor.phone }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Email</span>
+                                        <span>{{ investor.email }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Investment</span>
+                                        <span>{{ investor.investment }}</span>
+                                    </li>
+                                    <li>
+                                      <span>Password</span>
+                                      <span>{{ investor.password }}</span>
+                                    </li>
+                                    
+                                </ul>
+                                <div class="team-view">
+                                    <a
+                                        href="{{ url_for('investor_details', investor_id=investor.id) }}"
+                                        class="btn btn-block btn-dim btn-primary"
+                                    ><span>View Profile</span></a>
+                                </div>
+                            </div>
+                            <!-- .team -->
+                        </div>
+                        <!-- .card-inner -->
+                    </div>
+                    <!-- .card -->
+                </div>
+                {% endfor %}
+                <!-- .col -->
+            </div>
+            
+            </div>
+            <!-- .nk-block -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content @e -->
+  </div>
+  <!-- wrap @e -->
+</div>
+
+{% endblock %}

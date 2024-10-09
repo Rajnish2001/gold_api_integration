@@ -1,0 +1,596 @@
+{% extends "base_t.html" %} {% block content %}
+
+<div class="nk-app-root">
+  <!-- wrap @s -->
+  <div class="nk-wrap">
+    <!-- content @s -->
+    <div class="nk-content nk-content-fluid">
+      <div class="container-xl wide-xl">
+        <div class="nk-content-inner">
+          <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+              <div class="nk-block-between">
+                <div class="nk-block-head-content">
+                  <h3 class="nk-block-title page-title">
+                    Investment Dashboard
+                  </h3>
+                  <div class="nk-block-des text-soft">
+                    <p>Welcome to Varniraj</p>
+                  </div>
+                </div>
+                <!-- .nk-block-head-content -->
+                <div class="nk-block-head-content">
+                  <div class="toggle-wrap nk-block-tools-toggle">
+                    <a
+                      href="#"
+                      class="btn btn-icon btn-trigger toggle-expand me-n1"
+                      data-target="pageMenu"
+                      ><em class="icon ni ni-more-v"></em
+                    ></a>
+
+                    <!-- .toggle-expand-content -->
+                  </div>
+                  <!-- .toggle-wrap -->
+                </div>
+                <!-- .nk-block-head-content -->
+              </div>
+              <!-- .nk-block-between -->
+            </div>
+            <!-- .nk-block-head -->
+            <div class="nk-block">
+              <div class="row g-gs">
+                <div class="col-md-4">
+                  <div class="card card-bordered card-full">
+                    <div class="card-inner">
+                      <div class="card-title-group align-start mb-0">
+                        <div class="card-title">
+                          <h6 class="subtitle">Total Deposit</h6>
+                        </div>
+                        <div class="card-tools">
+                          <em
+                            class="card-hint icon ni ni-help-fill"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            title="Total Deposited"
+                          ></em>
+                        </div>
+                      </div>
+                      <div class="card-amount">
+                        <span class="amount">
+                          {{ total_deposit }}
+                          <span class="currency currency-usd">INR</span>
+                        </span>
+                        <!-- <span class="change up text-danger"><em class="icon ni ni-arrow-long-up"></em>1.93%</span> -->
+                      </div>
+                      <div class="invest-data">
+                        <div class="invest-data-amount g-2">
+                          <div class="invest-data-history">
+                            <div class="title">This Month</div>
+                            <div class="amount">
+                              2,940.59
+                              <span class="currency currency-usd">USD</span>
+                            </div>
+                          </div>
+                          <div class="invest-data-history">
+                            <div class="title">This Week</div>
+                            <div class="amount">
+                              1,259.28
+                              <span class="currency currency-usd">USD</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="invest-data-ck">
+                          <canvas
+                            class="iv-data-chart"
+                            id="totalDeposit"
+                          ></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- .card -->
+                </div>
+                <!-- .col -->
+                <div class="col-md-4">
+                  <div class="card card-bordered card-full">
+                    <div class="card-inner">
+                      <div class="card-title-group align-start mb-0">
+                        <div class="card-title">
+                          <h6 class="subtitle">Gold Prize</h6>
+                        </div>
+                        <div class="card-tools">
+                          <em
+                            class="card-hint icon ni ni-help-fill"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            title="Gold Prize"
+                          ></em>
+                        </div>
+                      </div>
+                      <div class="card-amount">
+                        <span class="amount">
+                          {% if gold_price %}
+                              {{ gold_price | round(2) }}
+                          {% else %}
+                              Loading...
+                          {% endif %}
+                      </span>
+                      <span class="currency currency-usd">USD</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- .card -->
+                </div>
+                <!-- .col -->
+                <div class="col-md-4">
+                  <div class="card card-bordered card-full">
+                    <div class="card-inner">
+                      <div class="card-title-group align-start mb-0">
+                        <div class="card-title">
+                          <h6 class="subtitle">Balance in Account</h6>
+                        </div>
+                        <div class="card-tools">
+                          <em
+                            class="card-hint icon ni ni-help-fill"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="left"
+                            title="Total Balance in Account"
+                          ></em>
+                        </div>
+                      </div>
+                      <div class="card-amount">
+                        <span class="amount">
+                          79,358.50
+                          <span class="currency currency-usd">USD</span>
+                        </span>
+                      </div>
+                      <div class="invest-data">
+                        <div class="invest-data-amount g-2">
+                          <div class="invest-data-history">
+                            <div class="title">This Month</div>
+                            <div class="amount">
+                              2,940.59
+                              <span class="currency currency-usd">USD</span>
+                            </div>
+                          </div>
+                          <div class="invest-data-history">
+                            <div class="title">This Week</div>
+                            <div class="amount">
+                              1,259.28
+                              <span class="currency currency-usd">USD</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="invest-data-ck">
+                          <canvas
+                            class="iv-data-chart"
+                            id="totalBalance"
+                          ></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- .card -->
+                </div>
+                <div class="col-md-6 col-xxl-4">
+                  <div class="card card-bordered card-full">
+                    <div class="card-inner">
+                      <div class="card-title-group mb-1">
+                        <div class="card-title">
+                          <h6 class="title">All Users</h6>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Investment</th>
+                                <th>Profit</th>
+                                <th>Used Gold</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% if investors %}
+                                  {% for investor in investors %}
+                                      <tr>
+                                          <td>{{ investor[0] }}</td>
+                                          <td>{{ investor[2] }}</td>
+                                          <td>{{ investor[5] }}</td>
+                                          <td>{{ investor[9] }}</td>
+                                          <td>{{ investor[10] }}</td>
+                                      </tr>
+                                  {% endfor %}
+                              {% else %}
+                                  <tr>
+                                      <td colspan="10">No investor data available</td>
+                                  </tr>
+                              {% endif %}
+                          </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- .col -->
+                <!-- <div class="col-md-6 col-xxl-4">
+                      <div class="card card-bordered card-full">
+                        <div class="card-inner">
+                          <div class="card-title-group mb-1">
+                            <div class="card-title">
+                              <h6 class="title">Investment Overview</h6>
+                              <p>
+                                The investment overview of your platform.
+                                <a href="#">All Investment</a>
+                              </p>
+                            </div>
+                          </div>
+                          <ul class="nav nav-tabs nav-tabs-card nav-tabs-xs">
+                            <li class="nav-item">
+                              <a
+                                class="nav-link active"
+                                data-bs-toggle="tab"
+                                href="#overview"
+                                >Overview</a
+                              >
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link"
+                                data-bs-toggle="tab"
+                                href="#thisyear"
+                                >This Year</a
+                              >
+                            </li>
+                            <li class="nav-item">
+                              <a
+                                class="nav-link"
+                                data-bs-toggle="tab"
+                                href="#alltime"
+                                >All Time</a
+                              >
+                            </li>
+                          </ul>
+                          <div class="tab-content mt-0">
+                            <div class="tab-pane active" id="overview">
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Currently Actived Investment
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      49,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">56</span
+                                      ><span class="change up text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-up"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      49,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Paid Profit</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Investment in this Month
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      49,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">23</span
+                                      ><span class="change down text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-down"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="thisyear">
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Currently Actived Investment
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      89,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">96</span
+                                      ><span class="change up text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-up"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      99,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Paid Profit</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Investment in this Month
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      149,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">83</span
+                                      ><span class="change down text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-down"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="alltime">
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Currently Actived Investment
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      249,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">556</span
+                                      ><span class="change up text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-up"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      149,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Paid Profit</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="invest-ov gy-2">
+                                <div class="subtitle">
+                                  Investment in this Month
+                                </div>
+                                <div class="invest-ov-details">
+                                  <div class="invest-ov-info">
+                                    <div class="amount">
+                                      249,395.395
+                                      <span class="currency currency-usd"
+                                        >USD</span
+                                      >
+                                    </div>
+                                    <div class="title">Amount</div>
+                                  </div>
+                                  <div class="invest-ov-stats">
+                                    <div>
+                                      <span class="amount">223</span
+                                      ><span class="change down text-danger"
+                                        ><em
+                                          class="icon ni ni-arrow-long-down"
+                                        ></em
+                                        >1.93%</span
+                                      >
+                                    </div>
+                                    <div class="title">Plans</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                <!-- .col -->
+                <div class="col-md-6 col-xxl-4">
+                  <div class="card card-bordered card-full">
+                    <div class="card-inner d-flex flex-column h-100">
+                      <div class="card-title-group mb-3">
+                        <div class="card-title">
+                          <h6 class="title">Top Invested Plan</h6>
+                          <p>In last 30 days top invested schemes.</p>
+                        </div>
+                        <div class="card-tools mt-n4 me-n1">
+                          <div class="drodown">
+                            <a
+                              href="#"
+                              class="dropdown-toggle btn btn-icon btn-trigger"
+                              data-bs-toggle="dropdown"
+                              ><em class="icon ni ni-more-h"></em
+                            ></a>
+                            <div
+                              class="dropdown-menu dropdown-menu-sm dropdown-menu-end"
+                            >
+                              <ul class="link-list-opt no-bdr">
+                                <li>
+                                  <a href="#"><span>15 Days</span></a>
+                                </li>
+                                <li>
+                                  <a href="#" class="active"
+                                    ><span>30 Days</span></a
+                                  >
+                                </li>
+                                <li>
+                                  <a href="#"><span>3 Months</span></a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="progress-list gy-3">
+                        <div class="progress-wrap">
+                          <div class="progress-text">
+                            <div class="progress-label">Strater Plan</div>
+                            <div class="progress-amount">58%</div>
+                          </div>
+                          <div class="progress progress-md">
+                            <div class="progress-bar" data-progress="58"></div>
+                          </div>
+                        </div>
+                        <div class="progress-wrap">
+                          <div class="progress-text">
+                            <div class="progress-label">Silver Plan</div>
+                            <div class="progress-amount">18.49%</div>
+                          </div>
+                          <div class="progress progress-md">
+                            <div
+                              class="progress-bar bg-orange"
+                              data-progress="18.49"
+                            ></div>
+                          </div>
+                        </div>
+                        <div class="progress-wrap">
+                          <div class="progress-text">
+                            <div class="progress-label">Dimond Plan</div>
+                            <div class="progress-amount">16%</div>
+                          </div>
+                          <div class="progress progress-md">
+                            <div
+                              class="progress-bar bg-teal"
+                              data-progress="16"
+                            ></div>
+                          </div>
+                        </div>
+                        <div class="progress-wrap">
+                          <div class="progress-text">
+                            <div class="progress-label">Platinam Plan</div>
+                            <div class="progress-amount">29%</div>
+                          </div>
+                          <div class="progress progress-md">
+                            <div
+                              class="progress-bar bg-pink"
+                              data-progress="29"
+                            ></div>
+                          </div>
+                        </div>
+                        <div class="progress-wrap">
+                          <div class="progress-text">
+                            <div class="progress-label">Vibranium Plan</div>
+                            <div class="progress-amount">33%</div>
+                          </div>
+                          <div class="progress progress-md">
+                            <div
+                              class="progress-bar bg-azure"
+                              data-progress="33"
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="invest-top-ck mt-auto">
+                        <canvas
+                          class="iv-plan-purchase"
+                          id="planPurchase"
+                        ></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- .col -->
+
+                <!-- Recent Activities col div -->
+
+                <!-- .col -->
+
+                <!-- Notifications col div -->
+
+                <!-- .col -->
+
+                <!-- recent investment col.... -->
+
+                <!-- .col -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content @e -->
+    <!-- footer @s -->
+
+    <!-- footer @e -->
+  </div>
+  <!-- wrap @e -->
+</div>
+{% endblock %}

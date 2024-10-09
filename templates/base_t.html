@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+  <head>
+    <base href="../" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Softnio" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers."
+    />
+    <!-- Fav Icon  -->
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/favicon.png') }}"
+    />
+    <!-- Page Title  -->
+    <title>Varniraj Invest Dashboard | DashLite Admin Template</title>
+    <!-- StyleSheets  -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/dashlite.css') }}?ver=3.1.1"
+    />
+    <link
+      id="skin-default"
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/theme.css') }}?ver=3.1.1"
+    />
+  </head>
+
+  <body class="nk-body npc-invest bg-lighter">
+    <div class="nk-app-root">
+      <!-- wrap @s -->
+      <div class="nk-wrap">
+        <!-- main header @s -->
+        <div class="nk-header nk-header-fluid is-theme">
+          <div class="container-xl wide-xl">
+            <div class="nk-header-wrap">
+              <div class="nk-menu-trigger me-sm-2 d-lg-none">
+                <a
+                  href="#"
+                  class="nk-nav-toggle nk-quick-nav-icon"
+                  data-target="headerNav"
+                  ><em class="icon ni ni-menu"></em
+                ></a>
+              </div>
+              <div class="nk-header-brand">
+                <a class="navbar-brand" href="{{ url_for('dashboard') }}"
+                  ><h3 style="color: white">Varniraj</h3></a
+                >
+              </div>
+              <!-- .nk-header-brand -->
+              <div class="nk-header-menu" data-content="headerNav">
+                <ul class="nk-menu nk-menu-main ui-s2">
+                  <li class="nk-menu-item has-sub">
+                    <a
+                      href="{{ url_for('dashboard') }}"
+                      class="nk-menu-link nk-menu"
+                    >
+                      <span class="nk-menu-text">Dashboards</span>
+                    </a>
+                  </li>
+                  <!-- .nk-menu-item -->
+                  <li class="nk-menu-item has-sub">
+                    <a
+                      href="{{ url_for('add_bill') }}"
+                      class="nk-menu-link nk-menu"
+                    >
+                      <span class="nk-menu-text">Add Bill</span>
+                    </a>
+                  </li>
+                  <!-- .nk-menu-item -->
+                  <!-- <li class="nk-menu-item has-sub">
+                    <a
+                      href="{{ url_for('dashboard') }}"
+                      class="nk-menu-link nk-menu"
+                    >
+                      <span class="nk-menu-text">Pages</span>
+                    </a>
+                  </li> -->
+                  <!-- .nk-menu-item -->
+                  <!-- <li class="nk-menu-item has-sub">
+                    <a
+                      href="{{ url_for('dashboard') }}"
+                      class="nk-menu-link nk-menu"
+                    >
+                      <span class="nk-menu-text">Misc</span>
+                    </a>
+                  </li> -->
+                  <!-- .nk-menu-item -->
+                  <li class="nk-menu-item has-sub">
+                    <a
+                      href="{{ url_for('user_list') }}"
+                      class="nk-menu-link nk-menu"
+                    >
+                      <span class="nk-menu-text">All User</span>
+                    </a>
+                  </li>
+                  <!-- .nk-menu-item -->
+                </ul>
+                <!-- .nk-menu -->
+              </div>
+              <!-- .nk-header-menu -->
+              <div class="nk-header-tools">
+                <ul class="nk-quick-nav">
+                  <li class="dropdown user-dropdown order-sm-first">
+                    <a
+                      href="#"
+                      class="dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                    >
+                      <div class="user-toggle">
+                        <div class="user-info d-none d-xl-block">
+                          <!-- <div class="user-status">Administrator</div> -->
+                          <div>
+                            <a href="{{ url_for('logout') }}"
+                              ><em class="icon ni ni-signout"></em
+                              ><span>Sign out</span></a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+           {{message}}
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <!-- child template -->
+      {% block content %}{% endblock %}
+    
+      <script src="{{ url_for('static', filename='assets/js/bundle.js') }}?ver=3.1.1"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/scripts.js') }}?ver=3.1.1"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/charts/gd-invest.js') }}?ver=3.1.1"></script>
+  </body>
+</html>
